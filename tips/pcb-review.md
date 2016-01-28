@@ -1,5 +1,11 @@
 # PCB Review Tips
-This file contains numerous tips to help people 
+This file contains numerous tips to help people who are new to Eagle review their designs intelligently. It's also a good list of reminders for experienced Eagle users.
+
+This document has four sections: 
+ 0. Before you begin!
+ 1. Schematic Review
+ 2. Board Review
+ 3. Library Component Review
 
 ## 0. Before you begin!
 The very first step for creating a PCB is to **determine where your board will be made.** Why? Because the board manufacturer will publish their capabilities. Things like minimum trace width, recommended trace width, spacing, drill sizes, etc... So the first step is to know these limits so that you can design your board with those in mind. Otherwise when you go to send the board for manufacture they may come back and tell you they can't do it, and you'll feel like a fool, won't you?
