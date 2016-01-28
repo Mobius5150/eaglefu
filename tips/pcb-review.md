@@ -37,6 +37,7 @@ You often see many different values of resistors somewhat arbitrarily chosen. Do
 
 #### 2.1.3 Inductors
  - Impedance - Have you checked the internal impedence of the inductor you plan to use? Many chip (ie surface mount) inductors have higher impedance than through-hole ones. Is it compatible with your design? Many buck/boost converters have guidelines on this.
+ - Package selection - Inductors come in many funky shapes and sizes. Ensure that you have picked yours out and are 100% sure the footprint you've selected will work. If you didn't make the footprint consider taking a look at it in the library editor to confirm dimensions. See section 3 on library component review.
  - Current rating - This is tied to the impedence - have you considered what the maximum current through your inductor is?
  - Back-EMF - You can't change the current over an inductor instantly. So what happens if you disconnect a load from an inductor (like with a switch)? You get a massive spike of _negative voltage_. If this could happen in your circuit consider a protection like a freewheeling diode.
 
@@ -54,6 +55,12 @@ Whenever you have a net coming off of a pin, but not obviously connecting to ano
 
 ### 2.4 Unconnected Pins
 This is an item of style, but I always recommend placing the text "NC" next to any pin that should remain unconnected. This tells later viewers that you intended for that pin to be unconnected, and haven't simply forgotten to route it.
+
+### 2.5 Power and Logic Voltage Levels
+Have you checked that all the power and logical voltage levels of your devices are compatible? Not all devices can do I2C or serial at 5V. Some can only do 3.3V or another voltage. Confirm this for every input pin on your board. As a general rule, no input should have a higher voltage than the main voltage input for the device, or a lower voltage than the ground for the device. There are expections to this rule - and if they exist they should be explicitly mentioned in the datasheet.
+
+### 2.6 Package Selection
+Ensure that you have explicitly selected the packages (the physical footprint) for all of your parts. E.g. Did you just use a generic footprint for a resistor/transistor/inductor without checking the sizing? If you are using a standard footprint like SOIC or SON ensure that you are knowingly using either North American or European standards as they have different pin spacing. Consult the part datasheet and the library editor (see section 3) when in doubt.
 
 ## 3. Board Review
 This section contains tips and things to consider when making/reviewing a PCB. DO NOT skip reading the first one - it's the biggest problem any board will face.
