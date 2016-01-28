@@ -62,6 +62,8 @@ Have you checked that all the power and logical voltage levels of your devices a
 ### 2.6 Package Selection
 Ensure that you have explicitly selected the packages (the physical footprint) for all of your parts. E.g. Did you just use a generic footprint for a resistor/transistor/inductor without checking the sizing? If you are using a standard footprint like SOIC or SON ensure that you are knowingly using either North American or European standards as they have different pin spacing. Consult the part datasheet and the library editor (see section 3) when in doubt.
 
+Also be wary of packages without exposed pins (such as BGA) these can be extremely difficult to solder, and you won't be able to tell if the alignment is correct without an x-ray machine.
+
 ### 2.7 Differential Pairs
 Identify signals that are differential pairs, and name them properly. See 3.8.
 
