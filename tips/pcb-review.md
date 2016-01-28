@@ -62,6 +62,9 @@ Have you checked that all the power and logical voltage levels of your devices a
 ### 2.6 Package Selection
 Ensure that you have explicitly selected the packages (the physical footprint) for all of your parts. E.g. Did you just use a generic footprint for a resistor/transistor/inductor without checking the sizing? If you are using a standard footprint like SOIC or SON ensure that you are knowingly using either North American or European standards as they have different pin spacing. Consult the part datasheet and the library editor (see section 3) when in doubt.
 
+### 2.7 Differential Pairs
+Identify signals that are differential pairs, and name them properly. See 3.8.
+
 ## 3. Board Review
 This section contains tips and things to consider when making/reviewing a PCB. DO NOT skip reading the first one - it's the biggest problem any board will face.
 
@@ -78,6 +81,27 @@ Problems of this type are often concentrated around the following elements:
     - If you plan on making your own connectors do you have proper crimping tools, and know how to use them? Without these tools (and even with them) custom connectors can be horribly unreliable.
     - Is the other end of the connector larger than the board-side connector? Many connectors (like molex) have tabs or prongs on the outside of the housing. What this means is that when the connector is attached _it will take up more space on your board_ so check that your connectors aren't too close together.
  - Mounting - Do you have a plan for how the board will be secured relative to it's surroundings? Does it have screw holes? Do you have tabs on the edge to hook onto something? If you plan to have something close to an edge do you have components that are perhaps too close and will interfere?
+
+### 3.2 Trace Width and Power Considerations
+
+### 3.3 Planes and Polygons
+Discuss different planes and polygons, assigning rank, thermals, orphans.
+
+### 3.4 Silkscreen and Component Labels
+Discuss the normalize-text.ulp. Mention the smash command to re-arrange component labels and delete names/values.
+
+### 3.5 Board Labelling
+Place a descriptive name and revision number on each board. I also like to place my name on it.
+
+### 3.6 Component Rotations
+Choose 1 or two rotations for components. They should be either vertical, -45 degrees or +45 degrees. Unless you're going for something artistic don't use other rotations, and stick with 1 or 2.
+
+### 3.7 Component Proximity
+Consider the proximity of capacitors and resistors to input pins. If it needs to be very close ensure that it is. Consult reference designs for power components, microprocessors, and anything high-frequency.
+
+### 3.8 Differential Pairs
+
+### 3.9 Controlled Impedence
 
 ## 4. Library Component Review
 
