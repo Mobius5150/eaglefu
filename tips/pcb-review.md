@@ -105,5 +105,17 @@ Consider the proximity of capacitors and resistors to input pins. If it needs to
 
 ### 3.9 Controlled Impedence
 
+### 3.10 Antennas
+Antennas are a bowl of worms. Be very careful as they often require controlled impedence, precise routing, no sharp trace angles, and placement clear of top/bottom/internal copper for good reception. Seriously, consult a pro.
+
+### 3.11 Analog Signals and Grounds
+Keep any noisy analog signals and grounds away from digital ones. If traces are close the parasitic capacitance from the analog signals will muddle the digital once and cause big problems, especially with high-frequency lines.
+
+### 3.12 I2C (TWI, Two-Wire Interace, Inter-Integrated Circuit Protocol)
+This protocal has alot of synonymous names, but they're all the same. Check that:
+
+ - Both SDA and SCL lines have pullups resistors. I2C doesn't work without them.
+ - Both SDA and SCL lines should go through roughly the same places to ensure similar electrical properties.
+
 ## 4. Library Component Review
 
