@@ -9,7 +9,7 @@ This document has four sections:
  4. Library Component Review
 
 ## 1. Before you begin!
-The very first step for creating a PCB is to **determine where your board will be made.** Why? Because the board manufacturer will publish their capabilities. Things like minimum trace width, recommended trace width, spacing, drill sizes, etc... So the first step is to know these limits so that you can design your board with those in mind. Otherwise when you go to send the board for manufacture they may come back and tell you they can't do it, and you'll feel like a fool, won't you?
+The very first step for creating a PCB is to **determine where your board will be made.** Why? Because the board manufacturer will publish their capabilities. Things like minimum trace width, recommended trace width, spacing, drill sizes, etc... So the first step is to know these limits so that you can design your board with those in mind. Otherwise when you go to send the board for manufacture they may come back and tell you they can't do it, and you'll feel like a fool, won't you? It's also a good idea to keep in mind cost. Some manufacturers will charge a certain amount for anything less then 5cm x 5cm or 10cm x 10cm. This is also the time to decide how many layers you'll be using (for simple boards you'll typically choose two).
 
 ### DRU Files
 Most (good) PCB manufacturers will even supply you with design rule (DRU) files that allow Eagle to automatically check your board for compliance with their minimum requirements. I have a hotkey (Ctrl+Shift+D) for running design rule checks and I run them constantly. It's the best way to ensure you don't do a bunch of work and have to revisit it. It's also helpful if you are doing things at minimum-width or size.
