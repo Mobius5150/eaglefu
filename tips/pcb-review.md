@@ -4,22 +4,23 @@ This file contains numerous tips to help people who are new to Eagle review thei
 This document has four sections: 
 
  1. Before you begin!
- 2. Schematic Review
- 3. Board Review
- 4. Library Component Review
+  2. Schematic Review
+   3. Board Review
+    4. Library Component Review
 
 ## 1. Before you begin!
-The very first step for creating a PCB is to **determine where your board will be made.** Why? Because the board manufacturer will publish their capabilities. Things like minimum trace width, recommended trace width, spacing, drill sizes, etc... So the first step is to know these limits so that you can design your board with those in mind. Otherwise when you go to send the board for manufacture they may come back and tell you they can't do it, and you'll feel like a fool, won't you? It's also a good idea to keep in mind cost. Some manufacturers will charge a certain amount for anything less then 5cm x 5cm or 10cm x 10cm. This is also the time to decide how many layers you'll be using (for simple boards you'll typically choose two).
+The very first step for creating a PCB is to **determine where your board will be made.** Why? Because the board manufacturer will publish their capabilities. Things like minimum trace width, recommended trace width, spacing, drill sizes, etc... So the first step is to know these limits so that you can design your board with those in mind. Otherwise when you go to send the board for manufacture they may come back and tell you they can't do it, and you'll feel like a fool, won't
+you? It's also a good idea to keep in mind cost. Some manufacturers will charge a certain amount for anything less then 5cm x 5cm or 10cm x 10cm. This is also the time to decide how many layers you'll be using (for simple boards you'll typically choose two).
 
 ### DRU Files
 Most (good) PCB manufacturers will even supply you with design rule (DRU) files that allow Eagle to automatically check your board for compliance with their minimum requirements. I have a hotkey (Ctrl+Shift+D) for running design rule checks and I run them constantly. It's the best way to ensure you don't do a bunch of work and have to revisit it. It's also helpful if you are doing things at minimum-width or size.
 
 Here's some DRU files from common hobbyist PCB manufacturers:
  - Seeed Studio [2 layer](http://www.seeedstudio.com/document/rar/Seeed_Gerber_Generater_2-layer.zip) [4 layer](http://www.seeedstudio.com/document/rar/Seeed_Gerber_Generater_4-layer_1-2-15-16.rar)
- - Itead Studio [2 layer](http://iteadstudio.com/store/images/produce/PCB/PCB%20prototype/ITeadstudio_DRC.rar)
- - OSH Park [2 layer](https://oshpark.com/LaenPCBOrder.dru)
+  - Itead Studio [2 layer](http://iteadstudio.com/store/images/produce/PCB/PCB%20prototype/ITeadstudio_DRC.rar)
+   - OSH Park [2 layer](https://oshpark.com/LaenPCBOrder.dru)
 
-To load a DRC file in Eagle open the board view then select `Tools->DRC->Load`. Select the DRU file and click `Check` to run the DRC check.
+   To load a DRC file in Eagle open the board view then select `Tools->DRC->Load`. Select the DRU file and click `Check` to run the DRC check.
 
 ## 2. Schematic Review
 
@@ -31,21 +32,21 @@ You often see many different values of resistors somewhat arbitrarily chosen. Do
 
 #### 2.1.2 Capacitors
  - Voltage - Check the rated voltage of the capacitor. If you might have spikes make sure that the maximum voltage spike is nicely within the capacitor rating.
- - Capacitance/package - Ensure that you can physically find a capacitor of the rating you're looking for. You likely won't find a 0603 `1mF` capacitor.
- - Polarized? - Is the capacitor you have chosen polarized? Ie: does one end need to be more positive in voltage than the other? Have you got it oriented the right way? Will the voltage dip and become negative sometimes?
- - ESR - Some designs call for low-ESR capacitors (often with buck/boost converters). Does your cap need to be low ESR? Do you need to use a ceramic cap with a lower ESR than the electrolytic one you selected?
-    - If you didn't know ESR effects how fast a cap will react to transients, and defines things like inrush currents (ie: how much current does the cap take in the moment you apply 5V)
- - Number of caps vs. capacitance - some designs call for 3x`22uF` capacitors close together, rather than a single 66uF (or other value) capacitor. Have you done that right?
+  - Capacitance/package - Ensure that you can physically find a capacitor of the rating you're looking for. You likely won't find a 0603 `1mF` capacitor.
+   - Polarized? - Is the capacitor you have chosen polarized? Ie: does one end need to be more positive in voltage than the other? Have you got it oriented the right way? Will the voltage dip and become negative sometimes?
+    - ESR - Some designs call for low-ESR capacitors (often with buck/boost converters). Does your cap need to be low ESR? Do you need to use a ceramic cap with a lower ESR than the electrolytic one you selected?
+        - If you didn't know ESR effects how fast a cap will react to transients, and defines things like inrush currents (ie: how much current does the cap take in the moment you apply 5V)
+         - Number of caps vs. capacitance - some designs call for 3x`22uF` capacitors close together, rather than a single 66uF (or other value) capacitor. Have you done that right?
 
 #### 2.1.3 Inductors
  - Impedance - Have you checked the internal impedence of the inductor you plan to use? Many chip (ie surface mount) inductors have higher impedance than through-hole ones. Is it compatible with your design? Many buck/boost converters have guidelines on this.
- - Package selection - Inductors come in many funky shapes and sizes. Ensure that you have picked yours out and are 100% sure the footprint you've selected will work. If you didn't make the footprint consider taking a look at it in the library editor to confirm dimensions. See section 3 on library component review.
- - Current rating - This is tied to the impedence - have you considered what the maximum current through your inductor is?
- - Back-EMF - You can't change the current over an inductor instantly. So what happens if you disconnect a load from an inductor (like with a switch)? You get a massive spike of _negative voltage_. If this could happen in your circuit consider a protection like a freewheeling diode.
+  - Package selection - Inductors come in many funky shapes and sizes. Ensure that you have picked yours out and are 100% sure the footprint you've selected will work. If you didn't make the footprint consider taking a look at it in the library editor to confirm dimensions. See section 3 on library component review.
+   - Current rating - This is tied to the impedence - have you considered what the maximum current through your inductor is?
+    - Back-EMF - You can't change the current over an inductor instantly. So what happens if you disconnect a load from an inductor (like with a switch)? You get a massive spike of _negative voltage_. If this could happen in your circuit consider a protection like a freewheeling diode.
 
 #### 2.1.4 Resistors
  - Wattage - Double check the wattage of your resistor, and how much current you plan on pushing through it. Keep in mind that most chip resistors can only handle <=1/10W compared to many through-hole resistors which can often handle 1/4W. Don't make assumptions - check the datasheet.
- - Units - When you put in `10m` did you mean `0.010 Ohms` or `10,000,000 Ohms`? Consider adapting a naming convention that uses abbreviations for large exponent like "Meg". This way your resistors will be labelled `10m` for the first case, or `10Meg` for the second.
+  - Units - When you put in `10m` did you mean `0.010 Ohms` or `10,000,000 Ohms`? Consider adapting a naming convention that uses abbreviations for large exponent like "Meg". This way your resistors will be labelled `10m` for the first case, or `10Meg` for the second.
 
 ### 2.2 Component Net Connections and Junctions
 It is possible to have components that _look_ like there are nets connecting to their pins, when in actuality they aren't connected. Want an easy way to test? Grab the component with the move tool and drag it a little. Make sure all of the nets (the attached green/gray wires) move with the component. If anything doesn't, it's not connected. Once you're satisfied simply hit the `Escape` or `Esc` key to cancel the move without making any changes.
@@ -79,12 +80,12 @@ Most electrical-type people that find themselves designing PCBs often forget one
 
 Problems of this type are often concentrated around the following elements:
  - Dimensions - It's easy to zoom in on a CAD tool and lose sight of how big (or small) a part is. Do you know how big your design is? Take a ruler and draw the dimensions on a piece of paper. Can you easily handle it? Does it need to be that size?
- - Switches - Are your switches accessible to a human finger? Consider the dimensions of the board, where the switch is pointing, etc...
- - Connectors - Check all the same things as switches - are your connectors accessible? Have you considered how/where you will route the wires going from the connector? Will it be a mass of wires?
-    - Are your connectors standard sizes/spacings? Just because you can make a 7 pin 0.11" connector in Eagle doesn't mean that you can find that connector, premade at least.
-    - If you plan on making your own connectors do you have proper crimping tools, and know how to use them? Without these tools (and even with them) custom connectors can be horribly unreliable.
-    - Is the other end of the connector larger than the board-side connector? Many connectors (like molex) have tabs or prongs on the outside of the housing. What this means is that when the connector is attached _it will take up more space on your board_ so check that your connectors aren't too close together.
- - Mounting - Do you have a plan for how the board will be secured relative to it's surroundings? Does it have screw holes? Do you have tabs on the edge to hook onto something? If you plan to have something close to an edge do you have components that are perhaps too close and will interfere?
+  - Switches - Are your switches accessible to a human finger? Consider the dimensions of the board, where the switch is pointing, etc...
+   - Connectors - Check all the same things as switches - are your connectors accessible? Have you considered how/where you will route the wires going from the connector? Will it be a mass of wires?
+       - Are your connectors standard sizes/spacings? Just because you can make a 7 pin 0.11" connector in Eagle doesn't mean that you can find that connector, premade at least.
+           - If you plan on making your own connectors do you have proper crimping tools, and know how to use them? Without these tools (and even with them) custom connectors can be horribly unreliable.
+               - Is the other end of the connector larger than the board-side connector? Many connectors (like molex) have tabs or prongs on the outside of the housing. What this means is that when the connector is attached _it will take up more space on your board_ so check that your connectors aren't too close together.
+                - Mounting - Do you have a plan for how the board will be secured relative to it's surroundings? Does it have screw holes? Do you have tabs on the edge to hook onto something? If you plan to have something close to an edge do you have components that are perhaps too close and will interfere?
 
 ### 3.2 Trace Width and Power Considerations
 
@@ -92,10 +93,15 @@ Problems of this type are often concentrated around the following elements:
 Discuss different planes and polygons, assigning rank, thermals, orphans.
 
 ### 3.4 Silkscreen and Component Labels
-Discuss the normalize-text.ulp. Mention the smash command to re-arrange component labels and delete names/values.
+As one of the last steps of my board design I fix all the ugly silkscreening. Most components add names and values in different fonts and sizes to your PCB, which looks bad. Fortunately, fixing this is easy with a ULP script included with Eagle. To run the script go to `File->Run ULP` and Eagle will open to the built-in ULP folder. Select `normalize-text.ulp`. This will open a window with values for size and thickness - I like `0.5` and `0.05` (mm) respectively - but play with the settings
+and ensure the resulting text is supported by your manufacturer.
+
+I also generally don't like to include component values on a board - simply because they can change. It doesn't make sense to have 4.32k silkscreened on the board, when you later find that 3k works better. So simple use the `smash` tool in Eagle to allow you to manipulate the name and value of a component individually, and delete the value. Be sure to keep the name so you know what component it is!
+
+This is also a good time to re-arrange component names to ensure they're legible. Simply move the name after `smash`-ing them.
 
 ### 3.5 Board Labelling
-Place a descriptive name and revision number on each board. I also like to place my name on it.
+It's always a good idea to give a board a descriptive name, and version number - and always remember to increment your version number each time you order! Do this be placing a `text` layer on your finished board. I also like to add my name, or the name of the group making the board. Make sure the text goes on the `tPlace` layer. While you can put text directly in the copper, it's not always the greatest idea.
 
 ### 3.6 Component Rotations
 Choose 1 or two rotations for components. They should be either vertical, -45 degrees or +45 degrees. Unless you're going for something artistic don't use other rotations, and stick with 1 or 2.
@@ -104,7 +110,8 @@ Choose 1 or two rotations for components. They should be either vertical, -45 de
 Consider the proximity of capacitors and resistors to input pins. If it needs to be very close ensure that it is. Consult reference designs for power components, microprocessors, and anything high-frequency.
 
 ### 3.8 Differential Pairs
-To route a differential pair on an Eagle board ensure they are named properly (section 2.7). Then in the board layout select one of the wires of the signal. The other will start routing alongside it, with the distance set by its net class. To route just one of the signals hit the escape key. To add a meander (which helps ensure the lines are the same length) use the meander tool. This tool tells you the difference in length between the signal and adds a meander if neccesary. You can set the acceptable difference in length in your DRC settings.
+To route a differential pair on an Eagle board ensure they are named properly (section 2.7). Then in the board layout select one of the wires of the signal. The other will start routing alongside it, with the distance set by its net class. To route just one of the signals hit the escape key. To add a meander (which helps ensure the lines are the same length) use the meander tool. This tool tells you the difference in length between the signal and adds a meander if neccesary. You
+can set the acceptable difference in length in your DRC settings.
 
 ### 3.9 Controlled Impedence
 
@@ -119,7 +126,11 @@ Keep any noisy analog signals and grounds away from digital ones. If traces are 
 This protocal has alot of synonymous names, but they're all the same. Check that:
 
  - Both SDA and SCL lines have pullups resistors. I2C doesn't work without them.
- - Both SDA and SCL lines should go through roughly the same places to ensure similar electrical properties.
+    - Seriously, add pullups. You can rarely use an MCU's internal pullups with I2C. I once ordered a board without pullups and had to stop it mid-fab because it simply wouldn't work.
+       - Put some thought into the value of the pullup resistors. Short traces at low speeds should have larger pullups, while long traces at high speeds will have smaller pullups.
+        - Both SDA and SCL lines should go through roughly the same places to ensure similar electrical properties (such as line capacitance/rise/fall times/signal propogation).
+         - Any problems with capacitance or noisy neighbhouring traces will be exacerbated by higher frequencies (400kHz)
 
 ## 4. Library Component Review
+
 
