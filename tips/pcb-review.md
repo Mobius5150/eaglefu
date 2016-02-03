@@ -19,6 +19,8 @@ Here's some DRU files from common hobbyist PCB manufacturers:
  - Itead Studio [2 layer](http://iteadstudio.com/store/images/produce/PCB/PCB%20prototype/ITeadstudio_DRC.rar)
  - OSH Park [2 layer](https://oshpark.com/LaenPCBOrder.dru)
 
+To load a DRC file in Eagle open the board view then select `Tools->DRC->Load`. Select the DRU file and click `Check` to run the DRC check.
+
 ## 2. Schematic Review
 
 ### 2.1 Passive Component Selection and Ratings (Capacitors, Inductors, Resistors)
@@ -65,7 +67,7 @@ Ensure that you have explicitly selected the packages (the physical footprint) f
 Also be wary of packages without exposed pins (such as BGA) these can be extremely difficult to solder, and you won't be able to tell if the alignment is correct without an x-ray machine.
 
 ### 2.7 Differential Pairs
-Identify signals that are differential pairs, and name them properly. See 3.8.
+Common components such as USB and HDMI require you to route signals as differential pairs. This is made easy in Eagle by naming the signals correctly. Suffix the signals with `_N` and `_P` respectively, and the board will detect that they are differential pairs and help you with routing them. See [this post on differential pairs in Eagle](https://www.element14.com/community/thread/14788/l/differential-pair-signals-and-buses?displayFullThread=true) and see section 3.8.
 
 ## 3. Board Review
 This section contains tips and things to consider when making/reviewing a PCB. DO NOT skip reading the first one - it's the biggest problem any board will face.
@@ -102,11 +104,13 @@ Choose 1 or two rotations for components. They should be either vertical, -45 de
 Consider the proximity of capacitors and resistors to input pins. If it needs to be very close ensure that it is. Consult reference designs for power components, microprocessors, and anything high-frequency.
 
 ### 3.8 Differential Pairs
+To route a differential pair on an Eagle board ensure they are named properly (section 2.7). Then in the board layout select one of the wires of the signal. The other will start routing alongside it, with the distance set by its net class. To route just one of the signals hit the escape key. To add a meander (which helps ensure the lines are the same length) use the meander tool. This tool tells you the difference in length between the signal and adds a meander if neccesary. You can set the acceptable difference in length in your DRC settings.
 
 ### 3.9 Controlled Impedence
 
+
 ### 3.10 Antennas
-Antennas are a bowl of worms. Be very careful as they often require controlled impedence, precise routing, no sharp trace angles, and placement clear of top/bottom/internal copper for good reception. Seriously, consult a pro.
+Antennas are a bowl of worms. Be very careful as they often require controlled impedence, precise routing, and placement clear of top/bottom/internal copper for good reception. Seriously, consult a pro, or at least an application note from a reputable company.
 
 ### 3.11 Analog Signals and Grounds
 Keep any noisy analog signals and grounds away from digital ones. If traces are close the parasitic capacitance from the analog signals will muddle the digital once and cause big problems, especially with high-frequency lines.
